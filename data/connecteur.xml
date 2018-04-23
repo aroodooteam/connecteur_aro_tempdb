@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="False">
+        <record id="ir_cron_connecteur_v9_odoo_action" model="ir.cron">
+            <field name="name">Connecteur V9 Odoo</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'connecteur.aro'" name="model"/>
+            <field eval="'update_add_record'" name="function"/>
+        </record>
+        <record id="ir_cron_update_inv_mv" model="ir.cron">
+            <field name="name">Update invoice and move</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="False" name="active"/>
+            <field eval="'update.inv.mv'" name="model"/>
+            <field eval="'update_reference'" name="function"/>
+        </record>
+        <record id="ir_cron_update_inv_mv_by_number" model="ir.cron">
+            <field name="name">Update invoice and move by inv_number</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">60</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">1</field>
+            <field eval="False" name="doall"/>
+            <field eval="False" name="active"/>
+            <field eval="'update.inv.mv'" name="model"/>
+            <field eval="'update_reference_by_number'" name="function"/>
+        </record>
+    </data>
+</openerp>
