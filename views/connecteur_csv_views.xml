@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_connecteur_csv_tree" model="ir.ui.view">
+            <field name="name">connecteur.csv.tree</field>
+            <field name="model">connecteur.csv</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="connecteur.csv">
+                    <field name="name"/>
+                    <field name="csv_path"/>
+                    <field name="with_header"/>
+                    <field name="delimiter"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_connecteur_csv_form" model="ir.ui.view">
+            <field name="name">connecteur.csv.form</field>
+            <field name="model">connecteur.csv</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="connecteur.csv">
+                    <sheet>
+                        <h2><field name="name" placeholder="Name"/></h2>
+                        <group colspan="4">
+                            <field name="csv_path"/>
+                        </group>
+                        <group col="4">
+                            <field name="with_header"/>
+                            <field name="delimiter"/>
+                        </group>
+                        <separator string="Actions" colspan="4"/>
+                        <button string="Import partner" icon="gtk-ok" type="object" name="start_import"/>
+                        <!--<button string="Direct Import" icon="gtk-ok" type="object" name="importCsvFixedParam"/>-->
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_connecteur_csv_search" model="ir.ui.view">
+            <field name="name">connecteur.csv.search</field>
+            <field name="model">connecteur.csv</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="connecteur.csv">
+                    <field name="name" select="True"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_open_connecteur_csv_view">
+            <field name="name">connecteur.csv</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">connecteur.csv</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_connecteur_csv_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_connecteur_csv_view_form">
+            <field name="act_window_id" ref="act_open_connecteur_csv_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_connecteur_csv_form"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_connecteur_csv_view_tree">
+            <field name="act_window_id" ref="act_open_connecteur_csv_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_connecteur_csv_tree"/>
+        </record>
+        <menuitem id="menu_connecteur_csv"
+            parent="tempdb_tdc_root_menu"
+            sequence="20"
+            name="Tempdb prime"
+            action="act_open_connecteur_csv_view"/>
+    </data>
+</openerp>

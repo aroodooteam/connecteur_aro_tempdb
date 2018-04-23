@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_csv_base_model_tree" model="ir.ui.view">
+            <field name="name">csv.base.model.tree</field>
+            <field name="model">csv.base.model</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="csv.base.model">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                    <field name="output_field"/>
+                    <field name="allow_create"/>
+                    <field name="allow_update"/>
+                    <field name="domain_mapping"/>
+                </tree>
+            </field>
+        </record>
+        <record id="view_csv_base_model_form" model="ir.ui.view">
+            <field name="name">csv.base.model.form</field>
+            <field name="model">csv.base.model</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="csv base model">
+                    <sheet>
+                        <h2>
+                            <field name="sequence" class="oe_edit_only"/>
+                            <field name="name" placeholder="Model"/>
+                            <field name="model"/>
+                        </h2>
+                        <separator string="Permissions" colspan="4"/>
+                        <group colspan="4">
+                            <group col="4">
+                                <field name="allow_create"/>
+                                <field name="allow_update"/>
+                            </group>
+                        </group>
+                        <separator string="Domain" colspan="4"/>
+                        <group colspan="4">
+                            <field name="domain_mapping"/>
+                            <field name="output_field"/>
+                        </group>
+                        <separator string="CSV Map Setting" colspan="4"/>
+                        <field name="mapset_ids">
+                            <tree string="Map setting" name="Map setting" context="{'cbm_id': active_id}">
+                                <field name="csv_col"/>
+                                <field name="pgm_fld"/>
+                                <field name="used_in_domain"/>
+                                <field name="cbm_id"/>
+                            </tree>
+                            <form string="Map setting">
+                                <sheet>
+                                    <group col="4">
+                                        <field name="csv_col"/>
+                                        <field name="pgm_fld"/>
+                                        <field name="used_in_domain"/>
+                                        <field name="cbm_id"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_csv_base_model_search" model="ir.ui.view">
+            <field name="name">csv.base.model.search</field>
+            <field name="model">csv.base.model</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="csv.base.model">
+                    <field name="name" select="True"/>
+                    <field name="sequence"/>
+                    <field name="csv_loader_id"/>
+                </search>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="act_open_csv_base_model_view">
+            <field name="name">csv.base.model</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">csv.base.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_csv_base_model_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_csv_base_model_view_form">
+            <field name="act_window_id" ref="act_open_csv_base_model_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_csv_base_model_form"/>
+        </record>
+        <record model="ir.actions.act_window.view" id="act_open_csv_base_model_view_tree">
+            <field name="act_window_id" ref="act_open_csv_base_model_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_csv_base_model_tree"/>
+        </record>
+        <menuitem id="menu_csv_base_model"
+            parent="csv_loader_root_menu"
+            sequence="20"
+            name="Base model"
+            action="act_open_csv_base_model_view"/>
+    </data>
+</openerp>
